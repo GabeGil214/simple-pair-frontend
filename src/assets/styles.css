@@ -54,6 +54,64 @@
     right: 0
 }
 
+.hidden {
+  display: none !important;
+}
+
+.main-container {
+    min-height: 90vh;
+    max-height: fit-content;
+}
+
+.modal-buttons {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+}
+
+.content-button {
+  margin: 10px;
+}
+
+.thumbnail.node {
+  border-radius: 50%;
+}
+
+.thumbnail.node img {
+  border-radius: 50%;
+}
+
+.modal-box {
+  width: 400px;
+  height: auto;
+  margin: 0 auto;
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  z-index: 10;
+}
+
+.modal-button-container {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .badge_buttons {
     margin: 0 auto
 }
@@ -473,14 +531,14 @@ div.avatar-bg {
     .register-photo {
         background: transparent;
         padding: 150px 0 0;
-        height: 88vh
+        min-height: 90vh;
+        max-height: auto;
     }
 }
 
 .register-photo {
     background: transparent;
     padding: 100px 0 0;
-    height: auto;
     display: flex;
     align-items: center;
 }

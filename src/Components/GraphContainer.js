@@ -1,6 +1,5 @@
 import React from 'react'
-import cytoscape from 'cytoscape'
-import fcose from 'cytoscape-fcose'
+import Graph from './Graph'
 
 function GraphContainer(){
   // useEffect(){
@@ -9,7 +8,7 @@ function GraphContainer(){
   // }
   return (
     <div className="graph-container row">
-      <h1>This is the main section</h1>
+      <Graph />
     </div>
   )
 }
