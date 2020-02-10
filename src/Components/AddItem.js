@@ -1,11 +1,11 @@
 import React from 'react'
-import { Box, Button } from 'grommet'
+import { Box, Button, Heading } from 'grommet'
 
 function AddItem(){
 
   return(
     <Box className="modal-box">
-      <h1>Add New Food Item</h1>
+      <Heading level="3" alignSelf="center">Add New Food Item</Heading>
       <div className="form-group">
         <p className="input-label">Food Item</p>
         <input className="form-control" type="text" name="food-item" />
@@ -23,7 +23,7 @@ function AddItem(){
           <option value="DES">Dessert</option>
         </select>
       </div>
-      <Button type="submit" name="Submit" label="Submit" />
+      <Button type="submit" label="Submit" style={{borderRadius: '30px'}} />
     </Box>
   )
 }

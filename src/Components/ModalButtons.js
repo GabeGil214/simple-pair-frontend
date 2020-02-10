@@ -1,20 +1,40 @@
-import React , { Fragment, useState } from 'react'
+import React , { useState } from 'react'
 import AddItem from './AddItem'
 import AddLink from './AddLink'
 import { Link } from 'react-router-dom'
 import { Box, Button, Layer } from 'grommet'
+import styled from 'styled-components'
 import { Plus, Link as LinkIcon } from 'styled-icons/fa-solid'
 
-function ModalButtons(){
+function ModalButtonContainer(props){
   const [showItemModal, setItemModal] = useState(false);
   const [showLinkModal, setLinkModal] = useState(false);
 
+  const ModalButtons = (props) => (
+    <Box
+      style={{
+        position: 'fixed',
+        right: '25px',
+        bottom: '25px',
+        width: '75px'
+      }}
+      {...props}
+      />
+  )
+
+  const ContentDiv = styled.div`
+        margin: 10px;
+      `;
 
   return (
-    <Box className="modal-button-container">
-      <div className="content-button">
-          <Button id="create-button" onClick={() => setItemModal(true)} type="button" className="btn btn-dark modal-buttons">
-            <Plus />
+    <ModalButtons>
+      <ContentDiv>
+          <Button
+            onClick={() => setItemModal(true)}
+            primary={true}
+            fill={true}
+            icon={<Plus />}
+            />
             {showItemModal && (
               <Layer
                 onEsc={() => setItemModal(false)}
@@ -25,13 +45,16 @@ function ModalButtons(){
                 </div>
               </Layer>
             )}
-          </Button>
-      </div>
+      </ContentDiv>
 
-      <div className="content-button">
-          <Button id="link-button" onClick={() => setLinkModal(true)} type="button" className="btn btn-dark modal-buttons">
-            <LinkIcon />
-              {showLinkModal && (
+      <ContentDiv>
+          <Button
+            primary={true}
+            fill={true}
+            onClick={() => setLinkModal(true)}
+            icon={<LinkIcon />}
+            />
+            {showLinkModal && (
                 <Layer
                   onEsc={() => setLinkModal(false)}
                   onClickOutside={() => setLinkModal(false)}
@@ -41,10 +64,9 @@ function ModalButtons(){
                   </div>
                 </Layer>
               )}
-          </Button>
-      </div>
-    </Box>
+      </ContentDiv>
+    </ModalButtons>
   )
 }
 
-export default ModalButtons
+export default ModalButtonContainer

@@ -24,6 +24,17 @@
     height: 85vh
 }
 
+.node {
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+.link {
+  stroke: #999;
+  stroke-width: 1.1px;
+  stroke-opacity: .7;
+}
+
 .vote {
     width: 65%
 }
@@ -99,12 +110,12 @@
   padding: 40px;
   z-index: 10;
 }
-
+/*
 .modal-button-container {
   position: fixed;
   right: 25px;
   bottom: 25px;
-}
+} */
 
 .modal-container {
   display: flex;
@@ -349,7 +360,6 @@
 .login-clean {
     background: transparent;
     padding: 10% 0 2%;
-    height: 88vh;
     width: auto;
     border-radius: 10px;
     display: flex;
@@ -364,7 +374,8 @@
     .login-clean {
         background: transparent;
         padding: 6% 0;
-        height: 88vh;
+        min-height: 88vh;
+        max-height: 100%;
         width: auto
     }
 }

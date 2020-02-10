@@ -1,21 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { Header, Box, Nav as NavBar, Anchor } from 'grommet'
+import styled from 'styled-components'
+
+const StyledText = styled.p`
+        color: #fff;
+      `;
 
 function Nav(){
    return (
-     <div id="top-nav-bar">
-        <nav className="navbar navbar-dark navbar-expand-lg transparent navbar-custom">
-            <div className="container"><a className="navbar-brand" href="#">Simply Paired</a><button data-toggle="collapse" className="navbar-toggler" data-target="#navbarResponsive"><span className="navbar-toggler-icon"></span></button>
-                <div className="collapse navbar-collapse" id="navbarResponsive">
-                    <ul className="nav navbar-nav ml-auto">
-                        <li className="nav-item" role="presentation"><Link className="nav-link" to="/">Home</Link></li>
-                        <li className="nav-item" role="presentation"><Link className="nav-link" to="/login">Log In</Link></li>
-                        <li className="nav-item" role="presentation"><Link className="nav-link" to="/register">sign up</Link></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+     <Header pad="xsmall">
+        <Box pad="medium" direction="row" align="center">
+          <Anchor focusIndicator={false} className="navbar-brand" color="light-1" href="#">Simply Paired</Anchor>
+        </Box>
+        <NavBar pad="medium" direction="row" color="light-1">
+            <Link to="/"><StyledText>Home</StyledText></Link>
+            <Link to="/login"><StyledText>Log In</StyledText></Link>
+            <Link to="/register"><StyledText>Sign Up</StyledText></Link>
+        </NavBar>
+      </Header>
    )
 }
 

@@ -4,9 +4,33 @@ import './index.css';
 import App from './Components/App';
 import * as serviceWorker from './serviceWorker';
 import { Grommet } from 'grommet';
+import { base } from 'grommet/themes'
+import { deepMerge } from 'grommet/utils';
+
+const myTheme = deepMerge(base, {
+  global: {
+    focus: {
+      border: {
+        color: " #ff6a00"
+      }
+    }
+  },
+  button: {
+    border: {
+      radius: '50%',
+      color: "#ff6a00"
+    },
+    primary: {
+      color: "#121212"
+    },
+    padding: {
+      vertical: '10px'
+    }
+  }
+});
 
 ReactDOM.render(
-  <Grommet>
+  <Grommet theme={myTheme}>
     <App />
   </Grommet>
   , document.getElementById('root')
