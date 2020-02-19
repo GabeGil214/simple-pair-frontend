@@ -17,7 +17,7 @@ function GraphContainer(){
   // });
 
   return (
-    <div className="graph-container row">
+    <div className="graph-container">
       <Graph
         nodes={nodesList}
         links={edgeList}
