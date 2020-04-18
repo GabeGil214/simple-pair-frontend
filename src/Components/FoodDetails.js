@@ -1,13 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box } from 'grommet'
+import { BottomBar, FoodModal, ModalTab } from './styled'
 
-function FoodDetails(){
+function FoodDetails(props){
+  const { food } = props;
+  const {showComments, setShowComments } = useState(false)
+  //Request user info and comments list
+  // useEffect() => {
+  //
+  // }
+
   return(
-    <Box className="modal-box">
-      <h1>Food Item</h1>
-      <div><p>Some Text</p></div>
-      <div><p>Description</p></div>
-    </Box>
+    <FoodModal className="modal-box">
+      <h1>{food.title}</h1>
+      <div><p>{food.comment_text}</p></div>
+      <BottomBar
+        direction="row"
+        pad="none"
+        justify="around" >
+        <ModalTab
+          align="center"
+          border="right"
+          >
+          <p>Comments</p>
+        </ModalTab>
+        <ModalTab
+          align="center">
+          <p>Linked Foods</p>
+        </ModalTab>
+      </BottomBar>
+    </FoodModal>
   )
 }
 

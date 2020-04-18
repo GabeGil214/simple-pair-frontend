@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Grommet } from 'grommet';
 import { base } from 'grommet/themes'
 import { deepMerge } from 'grommet/utils';
+import { AuthContextProvider } from './reducers/authReducer.js';
 
 const myTheme = deepMerge(base, {
   global: {
@@ -26,13 +27,19 @@ const myTheme = deepMerge(base, {
     padding: {
       vertical: '10px'
     }
+  },
+  box: {
+    color: '#eee',
+    size: 'large'
   }
 });
 
 ReactDOM.render(
-  <Grommet theme={myTheme}>
-    <App />
-  </Grommet>
+  <AuthContextProvider>
+    <Grommet theme={myTheme}>
+      <App />
+    </Grommet>
+  </AuthContextProvider>
   , document.getElementById('root')
 );
 

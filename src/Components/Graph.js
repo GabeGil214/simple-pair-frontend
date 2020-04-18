@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, Fragment, useEffect, useState } from 'react';
 import FoodDetails from './FoodDetails';
 import { Box, Layer, Text } from 'grommet';
 import * as d3 from 'd3';
@@ -17,16 +17,21 @@ const NodeLabel = styled.text`
     `;
 
 class Graph extends Component {
-
-  state = {
-    nodes: [],
-    links: []
+  constructor(){
+    super()
+    this.state = {
+      foodModal: false,
+      currentItem: {}
+    }
   }
 
+
   static getDerivedStateFromProps(nextProps, prevState){
+    //Converts Nodes and Links arrays to d3 objects
     if(!nextProps.nodes) return null;
     let { nodes, links } = nextProps;
-
+    console.log(nodes)
+    console.log(links)
     nodes = nodes.map(d => Object.create(d))
     links = links.map(d => Object.create(d))
 
@@ -41,8 +46,8 @@ class Graph extends Component {
     simulation.force("link")
       .links(links);
 
-    console.log(nodes)
-    console.log(links)
+      console.log(nodes)
+
 
     return { nodes, links }
 
@@ -52,10 +57,18 @@ class Graph extends Component {
     return scale(category);
   }
 
+  showFoodModal(foodItem){
+    this.setState({
+      foodModal: true,
+      currentItem: foodItem,
+    })
+  }
+
 
 
   render(){
     return(
+      <Fragment>
         <svg viewBox={`${-height/2}, ${-width/2}, ${height}, ${width}`}>
           <g stroke="#222299" strokeOpacity="0.9" strokeWidth="1">
             {this.state.links.map(d => (
@@ -63,14 +76,30 @@ class Graph extends Component {
             ))}
           </g>
           <g fill="#fff" stroke="#000" strokeWidth="0.5">
-            {this.state.nodes.map(d => (
+            {this.state.nodes.map(d=> (
               <g transform={`translate(${d.x}, ${d.y})`}>
                 <NodeLabel dx="2" dy="1.2em">{d.title}</NodeLabel>
-                <circle r="5.5" cx="0" cy="0" title={d.title} fill={this.color(d.food_choice)}/>
+                <circle r="5.5" cx="0" cy="0" title={d.title} fill={this.color(d.food_choice)} onClick={() => this.showFoodModal(d)} />
               </g>
             ))}
           </g>
         </svg>
+        {this.state.foodModal && (
+          <Layer
+            onEsc={() => this.setState({
+              foodModal: false
+            })}
+            onClickOutside={() => this.setState({
+              foodModal: false
+            })}
+            >
+            <div className="modal-container">
+              <FoodDetails
+                food={this.state.currentItem} />
+            </div>
+          </Layer>
+        )}
+      </Fragment>
     )
   }
 
