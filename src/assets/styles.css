@@ -170,7 +170,7 @@
     margin-bottom: 5px
 }
 
-.contact-clean form .form-control {
+.contact-clean .form-control {
     background: #fff;
     border-radius: 2px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .05);
@@ -180,7 +180,7 @@
     height: 42px
 }
 
-.contact-clean form .btn,
+.contact-clean .btn,
 .highlight-phone .intro .btn {
     box-shadow: none;
     text-transform: uppercase;
@@ -189,18 +189,18 @@
     text-shadow: none
 }
 
-.contact-clean form .form-control:focus {
+.contact-clean .form-control:focus {
     border: 1px solid #b2b2b2
 }
 
-.contact-clean form textarea.form-control {
+.contact-clean textarea.form-control {
     min-height: 100px;
     max-height: 260px;
     padding-top: 10px;
     resize: vertical
 }
 
-.contact-clean form .btn {
+.contact-clean .btn {
     padding: 16px 32px;
     border: none;
     background: 0 0;
@@ -210,11 +210,11 @@
     outline: 0!important
 }
 
-.contact-clean form .btn:hover {
+.contact-clean .btn:hover {
     opacity: 1
 }
 
-.contact-clean form .btn-primary {
+.contact-clean .btn-primary {
     background-color: #055ada!important;
     margin-top: 15px;
     color: #fff
@@ -380,7 +380,7 @@
     }
 }
 
-.login-clean form {
+.login-clean {
     max-width: 320px;
     width: 90%;
     margin: 0 auto;
@@ -397,12 +397,6 @@
   border-radius: 10px;
 }
 
-.input-label {
-    font-size: 10px;
-    line-height: 0.5;
-    margin-bottom: 0;
-}
-
 
 .form-btn,
 img.avart-img {
@@ -415,7 +409,7 @@ img.avart-img {
     color: #f4476b
 }
 
-.login-clean form .form-control {
+.login-clean .form-control {
     background: #FFF7F2;
     border: none;
     border-bottom: 1px solid #dfe7f1;
@@ -555,29 +549,13 @@ div.avatar-bg {
 }
 
 .register-photo .image-holder {
-    width: 58%;
-    background: url(./img/08.jpg);
-    background-size: cover;
-    border-radius: 10px 0 0 10px;
+
 }
 
 .register-photo form img {
   display: none;
 }
 
-@media (max-width: 500px){
-  .register-photo .image-holder {
-    width: 0;
-  }
-  .register-photo form img {
-    display: block;
-    margin: 0 auto;
-  }
-  .register-photo .form-container form {
-    border-radius: 10px;
-    width: 100%;
-  }
-}
 
 .register-photo .form-container {
     display: flex;
