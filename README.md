@@ -1,4 +1,4 @@
-#Simple Pair Front End
+# Simple Pair Front End
 
 ### Getting started
 
