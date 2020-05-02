@@ -31,6 +31,9 @@ const myTheme = deepMerge(base, {
   box: {
     color: '#eee',
     size: 'large'
+  },
+  layer: {
+    background: 'transparent'
   }
 });
 

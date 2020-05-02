@@ -1,6 +1,6 @@
 import React from 'react';
 import backgroundURL from '../assets/img/08.jpg'
-import { Box, Button, FormField, TextInput, Text } from 'grommet';
+import { Box, Button, TextInput, Text } from 'grommet';
 import { Link } from 'react-router-dom';
 
 export const SleekInput = (props) => (
@@ -108,6 +108,9 @@ export const FoodModal = (props) => (
 
 export const BottomBar = (props) => (
   <Box
+    style={{
+      borderRadius: '0 0 10px 10px',
+    }}
     {...props}
     />
 )
@@ -115,7 +118,10 @@ export const BottomBar = (props) => (
 export const ModalTab = (props) => (
   <Box
     style={{
-      width: '50%'
+      width: '50%',
+      background: 'transparent',
+      color: '#333',
+      paddingTop: '5px'
     }}
     {...props}
     />
