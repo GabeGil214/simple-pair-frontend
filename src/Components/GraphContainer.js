@@ -1,19 +1,23 @@
-import React, { useContext, useState, useEffect } from 'react'
-import Graph from './Graph'
-import { nodesList, edgeList } from '../graphData'
-import axios from 'axios';
+import React, { useContext } from 'react'
+import Graph from './Graph';
+import { Box } from 'grommet';
 import { FoodContext } from '../reducers/foodReducer.js'
 
 function GraphContainer(){
-  const [state, dispatch] = useContext(FoodContext);
+  const [foodState, dispatch] = useContext(FoodContext);
 
   return (
-      <div className="graph-container">
+      <Box
+        width="large"
+        margin={{
+          "vertical": "0",
+          "horizontal": "auto"
+        }}>
         <Graph
-          nodes={state.foodItems}
-          links={state.links}
+          nodes={foodState.foodItems}
+          links={foodState.links}
            />
-      </div>
+       </Box>
   )
 }
 

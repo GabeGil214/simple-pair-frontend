@@ -1,12 +1,12 @@
 import React, { useReducer, createContext } from 'react';
 import axios from 'axios';
 
-export const FoodContext = createContext();
-
 const initialFoodState = {
     foodItems: [],
     links: []
 };
+
+export const FoodContext = createContext();
 
 const options = {
     headers: {
@@ -14,38 +14,6 @@ const options = {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   }
-
-const fetchData = async () => {
-  await axios.get('http://127.0.0.1:8000/api/food/', options).then(response => {
-    initialFoodState.foodItems = response.data.results
-  }).catch(error => {
-    console.log(error.response)
-  });
-
-  await axios.get('http://127.0.0.1:8000/api/links/', options).then(response => {
-    initialFoodState.links = response.data.results
-  }).catch(error => {
-    console.log(error.response)
-  });
-
-    // initialFoodState.links = [
-    //   {
-    //     id: 1,
-    //     owner: 1,
-    //     source: 1,
-    //     target: 2,
-    //   },
-    //   {
-    //     id: 2,
-    //     owner: 1,
-    //     source: 3,
-    //     target: 4,
-    //   }
-    // ]
-
-};
-
-fetchData();
 
 const foodReducer = (state, action) => {
     switch (action.type) {
@@ -81,6 +49,24 @@ const foodReducer = (state, action) => {
             return state;
     }
 };
+
+
+const fetchData = async () => {
+  await axios.get('http://127.0.0.1:8000/api/food/', options).then(response => {
+    initialFoodState.foodItems = response.data.results;
+  }).catch(error => {
+    console.log(error.response);
+  });
+
+  await axios.get('http://127.0.0.1:8000/api/links/', options).then(response => {
+    initialFoodState.links = response.data.results;
+  }).catch(error => {
+    console.log(error.response)
+  });
+
+};
+
+fetchData();
 
 
 export const FoodContextProvider = props => {

@@ -1,50 +1,55 @@
 import React, { useState, useContext } from 'react';
 import { Box, Button, Heading } from 'grommet';
 import { AuthContext } from '../reducers/authReducer';
+import { FoodContext } from '../reducers/foodReducer';
 import axios from 'axios';
 
 function AddItem(){
 
   const [title, setTitle] = useState('');
   const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState(false);
   const [foodChoice, setFoodChoice] = useState('');
+  const [foodState, foodDispatch] = useContext(FoodContext);
   const [authState, authDispatch] = useContext(AuthContext);
 
   async function createFoodItem(){
-    const foodData = new FormData();
-    foodData.append('title', title);
-    foodData.append('comment_text', commentText);
-    foodData.append('date_added', new Date());
-    foodData.append('allow_comments', comments);
-    foodData.append('food_choice', foodChoice);
-    foodData.append('owner', 1);
+    // const foodData = new FormData();
+    // foodData.append('csrfmiddlewaretoken', 'CGBVCPkCl8A5lQKS4hg1idB4pANHzeyPLdnbSiVg4MO6C0zk7dzXhTo1i7P4M5S9');
+    // foodData.append('title', title);
+    // foodData.append('comment_text', commentText);
+    // foodData.append('date_added', new Date());
+    // foodData.append('allow_comments', comments);
+    // foodData.append('food_choice', foodChoice);
+    // foodData.append('owner', 1);
+
 
     const options = {
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Basic ${authState.key}`
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': `Token ${authState.key}`
       }
     }
 
-    console.log(authState.key);
-    axios.post('http://127.0.0.1:8000/api/food/', foodData
-    // {
-    //     // "title": title,
-    //     // "comment_text": commentText,
-    //     // "date_added": new Date(),
-    //     // "allow_comments": comments,
-    //     // "food_choice": foodChoice,
-    //     // "owner": 1
-    // }
+    axios.post('http://127.0.0.1:8000/api/food/',
+    {
+        "title": title,
+        "comment_text": commentText,
+        "date_added": new Date(),
+        "allow_comments": false,
+        "food_choice": foodChoice,
+        "owner": 1
+    }
     , options).then(response => {
+      foodDispatch({
+        type: 'ADD_FOOD_ITEM',
+        payload: response.data
+      })
       console.log(response)
     }).catch(error => {
       console.log(error)
     })
 
-    // console.log(response);
   }
 
   return(

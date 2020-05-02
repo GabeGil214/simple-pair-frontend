@@ -1,29 +1,39 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 import { Box, Button, Heading } from 'grommet'
+import { AuthContext } from '../reducers/authReducer'
+import { FoodContext } from '../reducers/foodReducer'
 import axios from 'axios'
 
 function AddLink(){
-
+  const [authState, authDispatch] = useContext(AuthContext);
   const [linkOne, setLinkOne] = useState(null);
   const [linkTwo, setLinkTwo] = useState(null);
+  const [links, linkDispatch] = useContext(FoodContext);
 
   async function createLink(){
     const options = {
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json;charset=UTF-8'
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': `Token ${authState.key}`
       }
     }
 
     axios.post('http://127.0.0.1:8000/api/links/',{
-        "value": 0,
+        "value": 3,
         "owner": 1,
-        "link_one": linkOne,
-        "link_two": linkTwo
+        "num_vote_up": 0,
+        "num_vote_down": 0,
+        "vote_score": 0,
+        "source": linkOne,
+        "target": linkTwo
     }, options).then(response => {
-      console.log(response)
+      linkDispatch({
+        type: 'ADD_LINK',
+        payload: response.data
+      })
     }).catch(error => {
-      console.log(error)
+      console.log(error.response)
     })
 
   }

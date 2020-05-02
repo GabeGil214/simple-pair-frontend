@@ -1,7 +1,6 @@
 import React , { useState } from 'react'
 import AddItem from './AddItem'
 import AddLink from './AddLink'
-import { Link } from 'react-router-dom'
 import { Box, Button, Layer } from 'grommet'
 import styled from 'styled-components'
 import { Plus, Link as LinkIcon } from 'styled-icons/fa-solid'
