@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Box, Heading } from 'grommet';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { ImageContainer, ErrorText, FormButton, SleekInput, RegisterForm, InputLabel, FooterLink } from './styled';
 import axios from 'axios';
+import { AuthContext } from '../reducers/authReducer';
 import RegisterLogo from '../assets/img/simply-paired-temp.png';
 
 function Register(){
-
+  const [authState, authDispatch] = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
@@ -32,21 +33,26 @@ function Register(){
 
     axios.post('http://127.0.0.1:8000/api/rest-auth/registration/', formData, options).then(response => {
       setRedirect(true);
+      authDispatch({
+        type: 'LOGIN',
+        payload: {
+        username,
+        key: response.data.key
+      }});
 
     }).catch(error => {
-      console.log(error.response.data)
-      if(error.response.status >= 400 && error.response.status < 500){
+      if(!error.response){
+        setErrorMessage('Something went wrong. Please try again.')
+      } else if(error.response.status >= 400 && error.response.status < 500){
         setErrorMessage(evaluateError(error.response.data))
       } else if (error.response.status >= 500){
         setErrorMessage('Could not communicate with server. Please try again.')
-      } else {
-        setErrorMessage('Something went wrong. Please try again.')
       }
     })
   }
 
   if (redirect === true) {
-    return <Redirect to='/' />
+    return <Redirect to='/food' />
   } else {
     return (
         <Box

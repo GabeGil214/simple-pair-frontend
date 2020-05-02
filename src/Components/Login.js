@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Heading } from 'grommet';
 import { AuthContext } from '../reducers/authReducer';
-import { SleekInput, FormButton, ErrorText, ImageContainer, LoginForm, InputLabel, FooterLink } from './styled';
+import { SleekInput, FormButton, ErrorText, LoginForm, InputLabel, FooterLink } from './styled';
 import RegisterLogo from '../assets/img/simply-paired-temp.png';
 
 function Login(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState('');
-  const [state, dispatch] = useContext(AuthContext);
+  const [authState, authDispatch] = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState('');
 
 
@@ -24,13 +24,15 @@ function Login(){
     const options = {
       headers: {
         'Accept': 'application/json',
-        'Content-Type':'multipart/form-data'
+        'Content-Type':'multipart/form-data',
       }
     }
 
-    axios.post('http://127.0.0.1:8000/api/rest-auth/login/', formData, options).then(response => {
+    axios.post('http://127.0.0.1:8000/api/rest-auth/login/', formData, options, {withCredentials: true}).then(response => {
+      sessionStorage.setItem('userKey', response.data.key);
+      sessionStorage.setItem('username', username);
       setRedirect(true);
-      dispatch({
+      authDispatch({
         type: 'LOGIN',
         payload: {
         username,
@@ -38,19 +40,20 @@ function Login(){
       }});
 
     }).catch(error => {
-      if(error.response.status >= 400 && error.response.status < 500){
+      console.log(error)
+      if(!error.response){
+        setErrorMessage('Something went wrong. Please try again.')
+      } else if(error.response.status >= 400 && error.response.status < 500){
         setErrorMessage('Username and Password are incorrect')
       } else if (error.response.status >= 500){
         setErrorMessage('Could not communicate with server. Please try again.')
-      } else {
-        setErrorMessage('Something went wrong. Please try again.')
       }
     })
   }
 
 
   if (redirect === true) {
-    return <Redirect to='/' />
+    return <Redirect to='/food' />
   } else {
     return (
       <LoginForm
