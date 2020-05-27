@@ -3,25 +3,16 @@ import { Box, Button, Heading } from 'grommet';
 import { AuthContext } from '../reducers/authReducer';
 import { FoodContext } from '../reducers/foodReducer';
 import axios from 'axios';
+import PRODUCTION_URL from '../assets/config';
 
 function AddItem(){
-
   const [title, setTitle] = useState('');
   const [commentText, setCommentText] = useState('');
-  const [foodChoice, setFoodChoice] = useState('');
+  const [foodChoice, setFoodChoice] = useState("BK");
   const [foodState, foodDispatch] = useContext(FoodContext);
   const [authState, authDispatch] = useContext(AuthContext);
 
   async function createFoodItem(){
-    // const foodData = new FormData();
-    // foodData.append('csrfmiddlewaretoken', 'CGBVCPkCl8A5lQKS4hg1idB4pANHzeyPLdnbSiVg4MO6C0zk7dzXhTo1i7P4M5S9');
-    // foodData.append('title', title);
-    // foodData.append('comment_text', commentText);
-    // foodData.append('date_added', new Date());
-    // foodData.append('allow_comments', comments);
-    // foodData.append('food_choice', foodChoice);
-    // foodData.append('owner', 1);
-
 
     const options = {
       headers: {
@@ -31,7 +22,7 @@ function AddItem(){
       }
     }
 
-    axios.post('http://127.0.0.1:8000/api/food/',
+    axios.post(PRODUCTION_URL + '/api/food/',
     {
         "title": title,
         "comment_text": commentText,
@@ -47,7 +38,7 @@ function AddItem(){
       })
       console.log(response)
     }).catch(error => {
-      console.log(error)
+      console.log(error.response)
     })
 
   }

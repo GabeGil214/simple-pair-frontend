@@ -34,12 +34,12 @@ function Nav(){
         </Box>
         {state.isLoggedIn ?
           <NavBar pad="medium" direction="row" color="light-1">
-              <Link to="/food"><StyledText>Welcome, {state.username}</StyledText></Link>
+              <Link to="/dev"><StyledText>Welcome, {state.username}</StyledText></Link>
               <StyledText><Anchor href="#" focusIndicator={false} color="light-1" onClick={userLogout}><ExitIcon />Sign Out</Anchor></StyledText>
           </NavBar> :
           <NavBar pad="medium" direction="row" color="light-1">
-              <Link to="/food"><StyledText>Home</StyledText></Link>
-              <Link to="/"><StyledText>Log In</StyledText></Link>
+              <Link to="/"><StyledText>Home</StyledText></Link>
+              <Link to="/login"><StyledText>Log In</StyledText></Link>
               <Link to="/register"><StyledText>Sign Up</StyledText></Link>
           </NavBar>
         }

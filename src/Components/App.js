@@ -34,8 +34,8 @@ function App() {
     <Router>
       <Main className="App">
         <Nav />
-        <Route exact path="/food" component={AppContainer} />
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={AppContainer} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Footer />
       </Main>

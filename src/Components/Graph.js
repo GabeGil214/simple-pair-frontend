@@ -12,11 +12,12 @@ const scale = d3.scaleOrdinal(d3.schemeCategory10);
 
 const NodeLabel = styled.text`
       font-size: 8px;
+      z-index: 99;
     `;
 
 class Graph extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       foodModal: false,
       currentItem: {}
@@ -32,9 +33,10 @@ class Graph extends Component {
     links = links.map(d => Object.create(d))
 
     let simulation = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id(d => d.id).distance(50))
-      .force("charge", d3.forceManyBody().strength(2))
-      .force("center", d3.forceCenter(width/4, height/2));
+      .force("link", d3.forceLink(links).id(d => d.id))
+      .force("charge", d3.forceManyBody())
+      .force("x", d3.forceX())
+      .force("y", d3.forceY());
 
     simulation
       .nodes(nodes);
@@ -63,7 +65,7 @@ class Graph extends Component {
     return(
       <Fragment>
         <svg viewBox={`${-height/2}, ${-width/2}, ${height}, ${width}`}>
-          <g stroke="#222299" strokeOpacity="0.9" strokeWidth="1">
+          <g stroke="#333" strokeOpacity="0.9" strokeWidth="1">
             {this.state.links.map(d => (
               <line key={d.id} x1={d.source.x} y1={d.source.y} x2={d.target.x} y2={d.target.y}/>
             ))}
@@ -71,7 +73,7 @@ class Graph extends Component {
           <g fill="#fff" stroke="#000" strokeWidth="0.5">
             {this.state.nodes.map(d=> (
               <g key={d.id} transform={`translate(${d.x}, ${d.y})`}>
-                <NodeLabel dx="2" dy="1.2em">{d.title}</NodeLabel>
+                <NodeLabel dx="2" dy="1.4em">{d.title}</NodeLabel>
                 <circle r="5.5" cx="0" cy="0" title={d.title} fill={this.color(d.food_choice)} onClick={() => this.showFoodModal(d)} />
               </g>
             ))}

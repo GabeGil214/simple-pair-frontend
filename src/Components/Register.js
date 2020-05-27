@@ -5,6 +5,7 @@ import { ImageContainer, ErrorText, FormButton, SleekInput, RegisterForm, InputL
 import axios from 'axios';
 import { AuthContext } from '../reducers/authReducer';
 import RegisterLogo from '../assets/img/simply-paired-temp.png';
+import PRODUCTION_URL from '../assets/config.js';
 
 function Register(){
   const [authState, authDispatch] = useContext(AuthContext);
@@ -31,7 +32,7 @@ function Register(){
       }
     }
 
-    axios.post('http://127.0.0.1:8000/api/rest-auth/registration/', formData, options).then(response => {
+    axios.post(PRODUCTION_URL + '/api/rest-auth/registration/', formData, options).then(response => {
       setRedirect(true);
       authDispatch({
         type: 'LOGIN',
@@ -52,7 +53,7 @@ function Register(){
   }
 
   if (redirect === true) {
-    return <Redirect to='/food' />
+    return <Redirect to='/' />
   } else {
     return (
         <Box

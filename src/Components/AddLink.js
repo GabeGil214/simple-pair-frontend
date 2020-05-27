@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react'
-import { Box, Button, Heading } from 'grommet'
-import { AuthContext } from '../reducers/authReducer'
-import { FoodContext } from '../reducers/foodReducer'
-import axios from 'axios'
+import React, { useState, useContext } from 'react';
+import { Box, Button, Heading } from 'grommet';
+import { AuthContext } from '../reducers/authReducer';
+import { FoodContext } from '../reducers/foodReducer';
+import axios from 'axios';
+import PRODUCTION_URL from '../assets/config';
 
 function AddLink(){
   const [authState, authDispatch] = useContext(AuthContext);
@@ -19,7 +20,7 @@ function AddLink(){
       }
     }
 
-    axios.post('http://127.0.0.1:8000/api/links/',{
+    axios.post(PRODUCTION_URL + '/api/links/',{
         "value": 3,
         "owner": 1,
         "num_vote_up": 0,

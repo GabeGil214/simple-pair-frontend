@@ -5,6 +5,7 @@ import { Heading } from 'grommet';
 import { AuthContext } from '../reducers/authReducer';
 import { SleekInput, FormButton, ErrorText, LoginForm, InputLabel, FooterLink } from './styled';
 import RegisterLogo from '../assets/img/simply-paired-temp.png';
+import PRODUCTION_URL from '../assets/config';
 
 function Login(){
   const [username, setUsername] = useState('');
@@ -28,7 +29,7 @@ function Login(){
       }
     }
 
-    axios.post('http://127.0.0.1:8000/api/rest-auth/login/', formData, options, {withCredentials: true}).then(response => {
+    axios.post(PRODUCTION_URL + '/api/rest-auth/login/', formData, options, {withCredentials: true}).then(response => {
       sessionStorage.setItem('userKey', response.data.key);
       sessionStorage.setItem('username', username);
       setRedirect(true);
@@ -53,7 +54,7 @@ function Login(){
 
 
   if (redirect === true) {
-    return <Redirect to='/food' />
+    return <Redirect to='/' />
   } else {
     return (
       <LoginForm
