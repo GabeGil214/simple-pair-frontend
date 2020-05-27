@@ -8,25 +8,26 @@ const initialFoodState = {
 
 export const FoodContext = createContext();
 
-const options = {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  }
-
 const foodReducer = (state, action) => {
     switch (action.type) {
-        // case 'GET_FOOD_ITEMS':
-        //     return {
-        //         foodItems: action.foodItems,
-        //         links: action.links
-        //     };
+        case 'GET_FOOD_ITEMS':
+            return {
+                foodItems: [...action.payload],
+                links: [...state.links]
+            };
         case 'ADD_FOOD_ITEM':
             return {
                 foodItems: [...state.foodItems, action.payload],
                 links: [...state.links]
             };
+        case 'GET_LINKS':
+          return {
+            foodItems: [...state.foodItems],
+            links: [
+              ...state.links,
+              ...action.payload
+            ]
+          };
         case 'ADD_LINK':
           return {
             foodItems: [...state.foodItems],
@@ -49,24 +50,6 @@ const foodReducer = (state, action) => {
             return state;
     }
 };
-
-
-const fetchData = async () => {
-  await axios.get('http://127.0.0.1:8000/api/food/', options).then(response => {
-    initialFoodState.foodItems = response.data.results;
-  }).catch(error => {
-    console.log(error.response);
-  });
-
-  await axios.get('http://127.0.0.1:8000/api/links/', options).then(response => {
-    initialFoodState.links = response.data.results;
-  }).catch(error => {
-    console.log(error.response)
-  });
-
-};
-
-fetchData();
 
 
 export const FoodContextProvider = props => {
